@@ -1,6 +1,6 @@
 import { requestGet } from 'web-common/nodejs/http.js'
 import { runCommand } from 'web-common/nodejs/process.js'
-import { dirname } from 'node:path'
+import path, { dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 import { writeFile } from 'fs/promises'
