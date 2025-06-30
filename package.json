@@ -1,7 +1,21 @@
 {
   "name": "web-common",
   "version": "1.0.0",
-  "main": "index.js",
   "license": "MIT",
-  "dependencies": {}
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build:nodejs-cjs": "bun run bun.build.js",
+    "tree": "cd src && tree /A /F > ../tree.txt"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.16",
+    "axios": "^1.10.0",
+    "commander": "^12.0.0",
+    "tar": "^7.4.3"
+  },
+  "devDependencies": {
+    "bun": "^1.2.17",
+    "glob": "^10.4.5"
+  }
 }

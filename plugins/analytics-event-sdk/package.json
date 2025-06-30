@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "dev:AnalyticsEventSDK": "node esbuild.config.mjs --watch",
+    "build:AnalyticsEventSDK": "node esbuild.config.mjs",
+    "dev:???": "npx esbuild src/AnalyticsEventSDK/main.js --outfile=dist/MCDRJSSDK.js --bundle --target=es5 --watch",
+    "build:???": "npx esbuild src/AnalyticsEventSDK/main.js --outfile=dist/MCDRJSSDK.js --bundle --minify --sourcemap --target=es5",
+    "tree": "cd src && tree /A /F > ../tree.txt"
+  },
+  "devDependencies": {
+    "@swc/helpers": "^0.5.8",
+    "esbuild": "^0.19.12",
+    "esbuild-plugin-es5": "^2.1.0",
+    "path": "^0.12.7"
+  }
+}

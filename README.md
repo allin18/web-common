@@ -7,9 +7,11 @@
   "type": "module",
   "dependencies": {
     "web-common": "allin18/web-common"
+    "web-common": "file:/D:/User/allin18/web-common"
   },
   "devDependencies": {
     "web-common": "allin18/web-common"
+    "web-common": "file:/D:/User/allin18/web-common"
   }
 }
 ```
