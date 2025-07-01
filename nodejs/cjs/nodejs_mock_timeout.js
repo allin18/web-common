@@ -69,6 +69,7 @@ var server = http.createServer((req, res) => {
 function startServer() {
   server.listen(3000, () => {
     console.log("服务运行中：http://localhost:3000");
+    console.log("例子：http://localhost:3000/test-timeout?delay=5000");
   });
 }
 

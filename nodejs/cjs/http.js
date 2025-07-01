@@ -45,12 +45,14 @@ var __export = (target, all) => {
 var exports_http = {};
 __export(exports_http, {
   requestGet: () => requestGet,
-  postJson: () => postJson
+  postJson: () => postJson,
+  covertHttps: () => covertHttps
 });
 module.exports = __toCommonJS(exports_http);
 var http = __toESM(require("node:http"));
 var https = __toESM(require("node:https"));
 var import_node_url = require("node:url");
+var covertHttps = (url) => url.replaceAll("http:", "https:");
 function postJson(url, data) {
   console.log(`\uD83D\uDCE1 发送 POST 请求: ${url} 数据: ${JSON.stringify(data)}`);
   return new Promise((resolve, reject) => {
