@@ -19,3 +19,9 @@ export function getCallerPath() {
 
   return path.dirname(callerFile);
 }
+
+export function pathToVariableName(path) {
+  return path
+      .replace(/[^a-zA-Z0-9]/g, '_') // 将所有非字母数字字符替换为 _
+      .replace(/^(\d)/, '_$1');      // 如果以数字开头，加 _
+}

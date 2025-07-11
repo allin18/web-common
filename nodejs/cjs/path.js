@@ -48,6 +48,7 @@ var __export = (target, all) => {
 // nodejs/path.js
 var exports_path = {};
 __export(exports_path, {
+  pathToVariableName: () => pathToVariableName,
   getCallerPath: () => getCallerPath
 });
 module.exports = __toCommonJS(exports_path);
@@ -63,6 +64,9 @@ function getCallerPath() {
   Error.prepareStackTrace = origPrepareStackTrace;
   const callerFile = stack[1].getFileName();
   return import_node_path.default.dirname(callerFile);
+}
+function pathToVariableName(path2) {
+  return path2.replace(/[^a-zA-Z0-9]/g, "_").replace(/^(\d)/, "_$1");
 }
 
 /**!
