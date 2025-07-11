@@ -1,4 +1,8 @@
-// cjs 版本
+/**!
+
+ cjs 版本 
+
+*/
 var __create = Object.create;
 var __getProtoOf = Object.getPrototypeOf;
 var __defProp = Object.defineProperty;
@@ -55,4 +59,8 @@ var isWindows = platform === "win32";
 var isMac = platform === "darwin";
 var isLinux = platform === "linux";
 
-// cjs 版本
+/**!
+
+ cjs 版本 end 
+
+*/

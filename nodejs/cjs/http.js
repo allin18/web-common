@@ -1,4 +1,8 @@
-// cjs 版本
+/**!
+
+ cjs 版本 
+
+*/
 var __create = Object.create;
 var __getProtoOf = Object.getPrototypeOf;
 var __defProp = Object.defineProperty;
@@ -108,4 +112,8 @@ function requestGet(url) {
   });
 }
 
-// cjs 版本
+/**!
+
+ cjs 版本 end 
+
+*/

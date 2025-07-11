@@ -1,4 +1,8 @@
-// cjs 版本
+/**!
+
+ cjs 版本 
+
+*/
 var __create = Object.create;
 var __getProtoOf = Object.getPrototypeOf;
 var __defProp = Object.defineProperty;
@@ -61,4 +65,8 @@ function getCallerPath() {
   return import_node_path.default.dirname(callerFile);
 }
 
-// cjs 版本
+/**!
+
+ cjs 版本 end 
+
+*/

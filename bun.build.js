@@ -12,8 +12,8 @@ const result = await Bun.build({
   format: "cjs",
   target: "node",
   // minify: true,
-  banner: "// cjs 版本",
-  footer: "// cjs 版本",
+  banner: "/**!\n\n cjs 版本 \n\n*/",
+  footer: "/**!\n\n cjs 版本 end \n\n*/",
   define: {
     version: JSON.stringify(version),
   },

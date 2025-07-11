@@ -1,4 +1,8 @@
-// cjs 版本
+/**!
+
+ cjs 版本 
+
+*/
 var __create = Object.create;
 var __getProtoOf = Object.getPrototypeOf;
 var __defProp = Object.defineProperty;
@@ -52,4 +56,8 @@ async function importJson(url) {
   return (await import(import_node_url.pathToFileURL(url), { assert: { type: "json" } })).default;
 }
 
-// cjs 版本
+/**!
+
+ cjs 版本 end 
+
+*/

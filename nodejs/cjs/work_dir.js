@@ -1,4 +1,8 @@
-// cjs 版本
+/**!
+
+ cjs 版本 
+
+*/
 var __create = Object.create;
 var __getProtoOf = Object.getPrototypeOf;
 var __defProp = Object.defineProperty;
@@ -41,16 +45,14 @@ var __export = (target, all) => {
     });
 };
 
-// nodejs/exe.env.js
-var exports_exe_env = {};
-__export(exports_exe_env, {
-  workDir: () => workDir,
+// nodejs/mode.js
+var exports_mode = {};
+__export(exports_mode, {
   mode: () => mode,
   isReleaseMode: () => isReleaseMode,
   isDebugMode: () => isDebugMode
 });
-module.exports = __toCommonJS(exports_exe_env);
-var import_node_path = __toESM(require("node:path"));
+module.exports = __toCommonJS(exports_mode);
 var isReleaseMode = isRelease();
 var isDebugMode = !isReleaseMode;
 var mode = isReleaseMode ? "production" : "development";
@@ -59,6 +61,18 @@ function isRelease() {
   console.log(v ? "Release 模式" : "Debug 模式");
   return v;
 }
+
+// nodejs/work_dir.js
+var exports_work_dir = {};
+__export(exports_work_dir, {
+  workDir: () => workDir
+});
+module.exports = __toCommonJS(exports_work_dir);
+var import_node_path = __toESM(require("node:path"));
 var workDir = isReleaseMode ? import_node_path.default.dirname(process.execPath) : import_node_path.default.join(process.cwd(), "dist");
 
-// cjs 版本
+/**!
+
+ cjs 版本 end 
+
+*/
