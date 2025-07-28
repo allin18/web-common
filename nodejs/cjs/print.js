@@ -48,6 +48,7 @@ var __export = (target, all) => {
 // nodejs/print.js
 var exports_print = {};
 __export(exports_print, {
+  startBuildTimer: () => startBuildTimer,
   printUpdateLine: () => printUpdateLine
 });
 module.exports = __toCommonJS(exports_print);
@@ -60,6 +61,26 @@ function printUpdateLine(content) {
     console.log(content);
   }
 }
+function startBuildTimer(label = "构建中") {
+  const startTime = Date.now();
+  const formatDuration = (ms) => {
+    const totalSeconds = ms / 1000;
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = (totalSeconds % 60).toFixed(2);
+    return `${minutes > 0 ? `${minutes} 分 ` : ""}${seconds} 秒`;
+  };
+  const timer = setInterval(() => {
+    const now = Date.now();
+    const duration = formatDuration(now - startTime);
+    console.log(`${label}: 已过 ${duration}...`);
+  }, 1000);
+  return () => {
+    clearInterval(timer);
+    const total = formatDuration(Date.now() - startTime);
+    console.log(`${label}完成，共耗时 ${total} ✅`);
+  };
+}
+
 /**!
 
  cjs 版本 end 

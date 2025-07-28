@@ -21,7 +21,7 @@ setTimeout(() => {
     stop(); // 停止打印
 }, 5000);
 * */
-function startBuildTimer(label = '构建中') {
+export function startBuildTimer(label = '构建中') {
     const startTime = Date.now();
     const formatDuration = (ms) => {
         const totalSeconds = ms / 1000;
