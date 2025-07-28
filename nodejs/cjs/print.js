@@ -48,6 +48,7 @@ var __export = (target, all) => {
 // nodejs/print.js
 var exports_print = {};
 __export(exports_print, {
+  startBuildTimer: () => startBuildTimer,
   printUpdateLine: () => printUpdateLine
 });
 module.exports = __toCommonJS(exports_print);
@@ -59,6 +60,19 @@ function printUpdateLine(content) {
   } else {
     console.log(content);
   }
+}
+function startBuildTimer(label = "") {
+  const startTime = Date.now();
+  const timer = setInterval(() => {
+    const now = Date.now();
+    const diffSeconds = ((now - startTime) / 1000).toFixed(2);
+    printUpdateLine(`${label}构建中: 已过 ${diffSeconds} 秒...`);
+  }, 1000);
+  return () => {
+    clearInterval(timer);
+    const totalSeconds = ((Date.now() - startTime) / 1000).toFixed(2);
+    console.log(`${label}构建完成，共耗时 ${totalSeconds} 秒 ✅`);
+  };
 }
 
 /**!

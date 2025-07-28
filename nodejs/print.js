@@ -13,3 +13,25 @@ export function printUpdateLine(content) {
         console.log(content)
     }
 }
+
+/*
+const stop = startBuildTimer();
+// 模拟构建过程（比如 5 秒后停止）
+setTimeout(() => {
+    stop(); // 停止打印
+}, 5000);
+* */
+export function startBuildTimer(label = '') {
+    const startTime = Date.now();
+    const timer = setInterval(() => {
+        const now = Date.now();
+        const diffSeconds = ((now - startTime) / 1000).toFixed(2);
+        printUpdateLine(`${label}构建中: 已过 ${diffSeconds} 秒...`);
+    }, 1000);
+
+    return () => {
+        clearInterval(timer);
+        const totalSeconds = ((Date.now() - startTime) / 1000).toFixed(2);
+        console.log(`${label}构建完成，共耗时 ${totalSeconds} 秒 ✅`);
+    };
+}
