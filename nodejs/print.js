@@ -26,8 +26,8 @@ export function startBuildTimer(label = '') {
     const formatDuration = (ms) => {
         const totalSeconds = ms / 1000;
         const minutes = Math.floor(totalSeconds / 60);
-        const seconds = (totalSeconds % 60).toFixed(2);
-        return `${minutes > 0 ? `${minutes} 分 ` : ''}${seconds} 秒`;
+        const seconds = Math.floor(totalSeconds % 60);
+        return `${minutes > 0 ? `${minutes}:` : ''}${seconds}`;
     };
     const timer = setInterval(() => {
         const now = Date.now();
