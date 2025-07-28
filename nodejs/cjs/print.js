@@ -61,7 +61,7 @@ function printUpdateLine(content) {
     console.log(content);
   }
 }
-function startBuildTimer(label = "构建中") {
+function startBuildTimer(label = "") {
   const startTime = Date.now();
   const formatDuration = (ms) => {
     const totalSeconds = ms / 1000;
@@ -72,12 +72,12 @@ function startBuildTimer(label = "构建中") {
   const timer = setInterval(() => {
     const now = Date.now();
     const duration = formatDuration(now - startTime);
-    console.log(`${label}: 已过 ${duration}...`);
+    printUpdateLine(`${label}构建中: 已过 ${duration}...`);
   }, 1000);
   return () => {
     clearInterval(timer);
     const total = formatDuration(Date.now() - startTime);
-    console.log(`${label}完成，共耗时 ${total} ✅`);
+    console.log(`${label}构建完成，共耗时 ${total} ✅`);
   };
 }
 
