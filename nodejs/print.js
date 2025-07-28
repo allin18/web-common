@@ -23,20 +23,23 @@ setTimeout(() => {
 * */
 export function startBuildTimer(label = '') {
     const startTime = Date.now();
+
     const formatDuration = (ms) => {
-        const totalSeconds = ms / 1000;
+        const totalSeconds = Math.floor(ms / 1000);
         const minutes = Math.floor(totalSeconds / 60);
         const seconds = Math.floor(totalSeconds % 60);
-        return `${minutes > 0 ? `${minutes}:` : ''}${seconds}`;
+        return `${minutes}:${seconds.toString().padStart(2, '0')}`;
     };
+
     const timer = setInterval(() => {
         const now = Date.now();
         const duration = formatDuration(now - startTime);
-        printUpdateLine(`${label}构建中: 已过 ${duration}...`);
+        printUpdateLine(`${label}正在构建中... ⏳ 已耗时 ${duration}`);
     }, 1000);
+
     return () => {
         clearInterval(timer);
         const total = formatDuration(Date.now() - startTime);
-        console.log(`${label}构建完成，共耗时 ${total} ✅`);
+        console.log(`${label}构建完成 ✅ 总耗时 ${total}`);
     };
 }
