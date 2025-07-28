@@ -56,7 +56,8 @@ function printUpdateLine(content) {
   if (process.stdout.isTTY) {
     process.stdout.clearLine();
     process.stdout.cursorTo(0);
-    process.stdout.write(content);
+    process.stdout.write(content + `
+`);
   } else {
     console.log(content);
   }

@@ -8,7 +8,7 @@ export function printUpdateLine(content) {
         // 这会将子进程的 stdin, stdout, stderr 继承主进程的终端连接，使其拥有 TTY 能力
         process.stdout.clearLine();     // 清除当前行
         process.stdout.cursorTo(0);  // 将光标移到行首
-        process.stdout.write(content);  // 写入新的内容
+        process.stdout.write(content+'\n');  // 写入新的内容
     } else {
         console.log(content)
     }
