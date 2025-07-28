@@ -21,17 +21,22 @@ setTimeout(() => {
     stop(); // 停止打印
 }, 5000);
 * */
-export function startBuildTimer(label = '') {
+function startBuildTimer(label = '构建中') {
     const startTime = Date.now();
+    const formatDuration = (ms) => {
+        const totalSeconds = ms / 1000;
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = (totalSeconds % 60).toFixed(2);
+        return `${minutes > 0 ? `${minutes} 分 ` : ''}${seconds} 秒`;
+    };
     const timer = setInterval(() => {
         const now = Date.now();
-        const diffSeconds = ((now - startTime) / 1000).toFixed(2);
-        printUpdateLine(`${label}构建中: 已过 ${diffSeconds} 秒...`);
+        const duration = formatDuration(now - startTime);
+        console.log(`${label}: 已过 ${duration}...`);
     }, 1000);
-
     return () => {
         clearInterval(timer);
-        const totalSeconds = ((Date.now() - startTime) / 1000).toFixed(2);
-        console.log(`${label}构建完成，共耗时 ${totalSeconds} 秒 ✅`);
+        const total = formatDuration(Date.now() - startTime);
+        console.log(`${label}完成，共耗时 ${total} ✅`);
     };
 }
