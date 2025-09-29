@@ -1,6 +1,25 @@
 import path from "node:path";
 import fs from "node:fs";
 
+// 是否存在 文件、目录
+export function safeIsExists(path) {
+    return fs.existsSync(path)
+}
+
+// 清理目录
+export function cleanDirectory(dir) {
+    if (fs.existsSync(dir)) {
+        fs.rmSync(dir, {recursive: true, force: true});
+        console.log('清理目录:', dir);
+    }
+}
+
+
+
+/*
+* 文件
+* */
+
 export function safeReadFile(path) {
     return fs.readFileSync(path, 'utf8');
 }
@@ -71,10 +90,11 @@ export function safeMoveFile(source, target) {
     }
 }
 
-// 移除目录 递归
-export function safeRemoveDirectory(path) {
-    fs.rmSync(path, { recursive: true, force: true });
-}
+
+
+/*
+* 目录
+* */
 
 // 创建目录 递归
 export function safeCreateDirectory(path) {
@@ -82,9 +102,9 @@ export function safeCreateDirectory(path) {
     console.log(`已创建目录 "${path}"`);
 }
 
-// 是否存在 文件、目录
-export function safeIsExists(path) {
-    return fs.existsSync(path)
+// 移除目录 递归
+export function safeRemoveDirectory(path) {
+    fs.rmSync(path, { recursive: true, force: true });
 }
 
 /**
@@ -113,7 +133,7 @@ export function safeCopyDirectory(sourceDir, targetDir) {
     }
 }
 
-// 移除目录
+// 移动目录
 export function safeMoveDirectory(source, target) {
     // 确保目标目录存在
     fs.mkdirSync(path.dirname(target), { recursive: true });
@@ -142,13 +162,5 @@ export function safeMoveDirectory(source, target) {
         } else {
             throw error;
         }
-    }
-}
-
-// 清理目录
-export function cleanDirectory(dir) {
-    if (fs.existsSync(dir)) {
-        fs.rmSync(dir, {recursive: true, force: true});
-        console.log('清理目录:', dir);
     }
 }

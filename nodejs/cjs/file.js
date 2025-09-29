@@ -63,6 +63,15 @@ __export(exports_file, {
 module.exports = __toCommonJS(exports_file);
 var import_node_path = __toESM(require("node:path"));
 var import_node_fs = __toESM(require("node:fs"));
+function safeIsExists(path2) {
+  return import_node_fs.default.existsSync(path2);
+}
+function cleanDirectory(dir) {
+  if (import_node_fs.default.existsSync(dir)) {
+    import_node_fs.default.rmSync(dir, { recursive: true, force: true });
+    console.log("清理目录:", dir);
+  }
+}
 function safeReadFile(path2) {
   return import_node_fs.default.readFileSync(path2, "utf8");
 }
@@ -104,15 +113,12 @@ function safeMoveFile(source, target) {
     }
   }
 }
-function safeRemoveDirectory(path2) {
-  import_node_fs.default.rmSync(path2, { recursive: true, force: true });
-}
 function safeCreateDirectory(path2) {
   import_node_fs.default.mkdirSync(path2, { recursive: true });
   console.log(`已创建目录 "${path2}"`);
 }
-function safeIsExists(path2) {
-  return import_node_fs.default.existsSync(path2);
+function safeRemoveDirectory(path2) {
+  import_node_fs.default.rmSync(path2, { recursive: true, force: true });
 }
 function safeCopyDirectory(sourceDir, targetDir) {
   if (!import_node_fs.default.existsSync(sourceDir)) {
@@ -154,12 +160,6 @@ function safeMoveDirectory(source, target) {
     } else {
       throw error;
     }
-  }
-}
-function cleanDirectory(dir) {
-  if (import_node_fs.default.existsSync(dir)) {
-    import_node_fs.default.rmSync(dir, { recursive: true, force: true });
-    console.log("清理目录:", dir);
   }
 }
 
