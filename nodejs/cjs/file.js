@@ -53,6 +53,7 @@ __export(exports_file, {
   safeRemoveDirectory: () => safeRemoveDirectory,
   safeReadFile: () => safeReadFile,
   safeMoveFile: () => safeMoveFile,
+  safeMoveDirectory: () => safeMoveDirectory,
   safeIsExists: () => safeIsExists,
   safeCreateDirectory: () => safeCreateDirectory,
   safeCopyFile: () => safeCopyFile,
@@ -126,6 +127,32 @@ function safeCopyDirectory(sourceDir, targetDir) {
       safeCopyDirectory(srcPath, destPath);
     } else {
       import_node_fs.default.copyFileSync(srcPath, destPath);
+    }
+  }
+}
+function safeMoveDirectory(source, target) {
+  import_node_fs.default.mkdirSync(import_node_path.default.dirname(target), { recursive: true });
+  try {
+    import_node_fs.default.renameSync(source, target);
+    console.log("目录重命名成功:", source, "->", target);
+  } catch (error) {
+    console.warn("目录重命名失败，尝试复制目录:", error.message);
+    if (error.code === "EXDEV") {
+      try {
+        safeCopyDirectory(source, target);
+        console.log("目录复制成功:", source, "->", target);
+      } catch (err) {
+        console.error("目录复制失败:", err.message);
+        throw err;
+      }
+      try {
+        safeRemoveDirectory(source);
+        console.log("源目录删除成功:", source);
+      } catch (err) {
+        console.warn("源目录删除失败（可能被占用）:", err.message);
+      }
+    } else {
+      throw error;
     }
   }
 }

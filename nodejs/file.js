@@ -113,6 +113,38 @@ export function safeCopyDirectory(sourceDir, targetDir) {
     }
 }
 
+// 移除目录
+export function safeMoveDirectory(source, target) {
+    // 确保目标目录存在
+    fs.mkdirSync(path.dirname(target), { recursive: true });
+    try {
+        // 尝试直接重命名
+        fs.renameSync(source, target);
+        console.log("目录重命名成功:", source, "->", target);
+    } catch (error) {
+        console.warn("目录重命名失败，尝试复制目录:", error.message);
+        if (error.code === "EXDEV") {
+            // 跨设备移动 → 递归复制 + 删除
+            try {
+                safeCopyDirectory(source, target);
+                console.log("目录复制成功:", source, "->", target);
+            } catch (err) {
+                console.error("目录复制失败:", err.message);
+                throw err; // 复制失败直接抛出
+            }
+            try {
+                safeRemoveDirectory(source);
+                console.log("源目录删除成功:", source);
+            } catch (err) {
+                console.warn("源目录删除失败（可能被占用）:", err.message);
+                // 删除失败也不阻塞
+            }
+        } else {
+            throw error;
+        }
+    }
+}
+
 // 清理目录
 export function cleanDirectory(dir) {
     if (fs.existsSync(dir)) {
