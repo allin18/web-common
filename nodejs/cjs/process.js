@@ -97,17 +97,25 @@ function runCommand2(command) {
     });
   });
 }
-function createProcess(command) {
+function createProcess(command, output) {
   return new Promise((resolve) => {
     console.log("createProcess", "command", command);
     const child = import_node_child_process.spawn(command, {
       shell: true
     });
     child.stdout.on("data", (data) => {
-      process.stdout.write(`stdout: ${data}`);
+      if (typeof output === "function") {
+        output({ type: "stdout", data });
+      } else {
+        process.stdout.write(`stdout: ${data}`);
+      }
     });
     child.stderr.on("data", (data) => {
-      process.stderr.write(`stderr: ${data}`);
+      if (typeof output === "function") {
+        output({ type: "stderr", data });
+      } else {
+        process.stderr.write(`stderr: ${data}`);
+      }
     });
     child.on("exit", (code) => {
       console.log(`子进程退出，退出码：${code}`);
