@@ -105,7 +105,7 @@ function createProcess(command, output) {
     });
     child.stdout.on("data", (data) => {
       if (typeof output === "function") {
-        output({ type: "stdout", data: data.toString("utf8") });
+        output({ type: "stdout", data: data.toString("utf8") }); // data = <Buffer e5 bd 93 ... 2e 38 0a>
       } else {
         process.stdout.write(`stdout: ${data}`);
       }
