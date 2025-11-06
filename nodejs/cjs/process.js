@@ -105,14 +105,14 @@ function createProcess(command, output) {
     });
     child.stdout.on("data", (data) => {
       if (typeof output === "function") {
-        output({ type: "stdout", data });
+        output({ type: "stdout", data: data.toString("utf8") });
       } else {
         process.stdout.write(`stdout: ${data}`);
       }
     });
     child.stderr.on("data", (data) => {
       if (typeof output === "function") {
-        output({ type: "stderr", data });
+        output({ type: "stderr", data: data.toString("utf8") });
       } else {
         process.stderr.write(`stderr: ${data}`);
       }

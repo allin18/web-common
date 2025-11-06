@@ -48,7 +48,7 @@ export function createProcess(command, output) {
     child.stdout.on("data", (data) => {
       // 将子进程的输出打印到控制台
       if (typeof output === 'function') {
-        output({ type: "stdout", data });
+        output({ type: "stdout", data: data.toString('utf8') });
       } else {
         process.stdout.write(`stdout: ${data}`);
       }
@@ -57,7 +57,7 @@ export function createProcess(command, output) {
     child.stderr.on("data", (data) => {
       // 将子进程的错误输出打印到控制台
       if (typeof output === 'function') {
-        output({ type: "stderr", data });
+        output({ type: "stderr", data: data.toString('utf8') });
       } else {
         process.stderr.write(`stderr: ${data}`);
       }
