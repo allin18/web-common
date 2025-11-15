@@ -108,7 +108,8 @@ export function safeRemoveDirectory(path) {
 }
 
 /**
- * 复制整个目录及其内容到目标目录
+ * 复制目录 但不包含目录本身
+ * 复制源文件夹的内容（而非源文件夹本身）到目标文件夹
  * @param {string} sourceDir - 源目录
  * @param {string} targetDir - 目标目录
  */
