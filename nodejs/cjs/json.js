@@ -53,7 +53,7 @@ __export(exports_json, {
 module.exports = __toCommonJS(exports_json);
 var import_node_url = require("node:url");
 async function importJson(url) {
-  return (await import(import_node_url.pathToFileURL(url), { assert: { type: "json" } })).default;
+  return (await import(import_node_url.pathToFileURL(url), { with: { type: "json" } })).default;
 }
 
 /**!
