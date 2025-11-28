@@ -55,7 +55,7 @@ export function safeMoveFile(source, target) {
         fs.renameSync(source, target);
         console.log('重命名成功:', source, '->', target);
     } catch (error) {
-        console.warn('重命名失败，尝试 copy + delete:', error.message);
+        console.log('重命名失败，尝试 copy + delete:', error.message);
         if (error.code === 'EXDEV') {
             // 方案1 跨设备时使用复制+删除方式
             try {
@@ -88,6 +88,13 @@ export function safeMoveFile(source, target) {
             throw error;
         }
     }
+}
+
+export function safeMoveFileToDirectory(source, targetDir) {
+    const fileName = path.basename(source);          // 原文件名
+    const target = path.join(targetDir, fileName);   // 拼接目标路径
+    fs.mkdirSync(targetDir, { recursive: true });    // 确保目录存在
+    return safeMoveFile(source, target);            // 调用原方法
 }
 
 
@@ -143,7 +150,7 @@ export function safeMoveDirectory(source, target) {
         fs.renameSync(source, target);
         console.log("目录重命名成功:", source, "->", target);
     } catch (error) {
-        console.warn("目录重命名失败，尝试复制目录:", error.message);
+        console.log("目录重命名失败，尝试复制目录:", error.message);
         if (error.code === "EXDEV") {
             // 跨设备移动 → 递归复制 + 删除
             try {

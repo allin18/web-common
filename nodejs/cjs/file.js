@@ -52,6 +52,7 @@ __export(exports_file, {
   safeRemoveFile: () => safeRemoveFile,
   safeRemoveDirectory: () => safeRemoveDirectory,
   safeReadFile: () => safeReadFile,
+  safeMoveFileToDirectory: () => safeMoveFileToDirectory,
   safeMoveFile: () => safeMoveFile,
   safeMoveDirectory: () => safeMoveDirectory,
   safeIsExists: () => safeIsExists,
@@ -93,7 +94,7 @@ function safeMoveFile(source, target) {
     import_node_fs.default.renameSync(source, target);
     console.log("重命名成功:", source, "->", target);
   } catch (error) {
-    console.warn("重命名失败，尝试 copy + delete:", error.message);
+    console.log("重命名失败，尝试 copy + delete:", error.message);
     if (error.code === "EXDEV") {
       try {
         import_node_fs.default.copyFileSync(source, target);
@@ -112,6 +113,12 @@ function safeMoveFile(source, target) {
       throw error;
     }
   }
+}
+function safeMoveFileToDirectory(source, targetDir) {
+  const fileName = import_node_path.default.basename(source);
+  const target = import_node_path.default.join(targetDir, fileName);
+  import_node_fs.default.mkdirSync(targetDir, { recursive: true });
+  return safeMoveFile(source, target);
 }
 function safeCreateDirectory(path2) {
   import_node_fs.default.mkdirSync(path2, { recursive: true });
@@ -142,7 +149,7 @@ function safeMoveDirectory(source, target) {
     import_node_fs.default.renameSync(source, target);
     console.log("目录重命名成功:", source, "->", target);
   } catch (error) {
-    console.warn("目录重命名失败，尝试复制目录:", error.message);
+    console.log("目录重命名失败，尝试复制目录:", error.message);
     if (error.code === "EXDEV") {
       try {
         safeCopyDirectory(source, target);
