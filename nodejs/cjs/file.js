@@ -57,6 +57,7 @@ __export(exports_file, {
   safeMoveDirectory: () => safeMoveDirectory,
   safeIsExists: () => safeIsExists,
   safeCreateDirectory: () => safeCreateDirectory,
+  safeCopyFileToDirectory: () => safeCopyFileToDirectory,
   safeCopyFile: () => safeCopyFile,
   safeCopyDirectory: () => safeCopyDirectory,
   cleanDirectory: () => cleanDirectory
@@ -87,6 +88,12 @@ function safeCopyFile(source, target) {
   import_node_fs.default.mkdirSync(targetDir, { recursive: true });
   import_node_fs.default.copyFileSync(source, target);
   console.log(`已复制文件 "${source}" 到 "${target}"`);
+}
+function safeCopyFileToDirectory(source, targetDir) {
+  const fileName = import_node_path.default.basename(source);
+  const target = import_node_path.default.join(targetDir, fileName);
+  import_node_fs.default.mkdirSync(targetDir, { recursive: true });
+  return safeCopyFile(source, target);
 }
 function safeMoveFile(source, target) {
   import_node_fs.default.mkdirSync(import_node_path.default.dirname(target), { recursive: true });

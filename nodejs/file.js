@@ -42,6 +42,13 @@ export function safeCopyFile(source, target) {
     console.log(`已复制文件 "${source}" 到 "${target}"`);
 }
 
+export function safeCopyFileToDirectory(source, targetDir) {
+    const fileName = path.basename(source);          // 原文件名
+    const target = path.join(targetDir, fileName);   // 拼接目标路径
+    fs.mkdirSync(targetDir, { recursive: true });    // 确保目录存在
+    return safeCopyFile(source, target);             // 调用原方法
+}
+
 // 移动文件 safeMoveTempFile
 export function safeMoveFile(source, target) {
     // // 确保目标目录存在（无论是否跨设备）
@@ -94,7 +101,7 @@ export function safeMoveFileToDirectory(source, targetDir) {
     const fileName = path.basename(source);          // 原文件名
     const target = path.join(targetDir, fileName);   // 拼接目标路径
     fs.mkdirSync(targetDir, { recursive: true });    // 确保目录存在
-    return safeMoveFile(source, target);            // 调用原方法
+    return safeMoveFile(source, target);             // 调用原方法
 }
 
 
